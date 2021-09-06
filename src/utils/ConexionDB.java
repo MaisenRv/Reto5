@@ -29,6 +29,7 @@ public class ConexionDB {
             }
             
         } catch (Exception e) {
+            e.getMessage();
         }
 
         return conn;

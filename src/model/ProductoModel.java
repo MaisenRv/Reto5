@@ -34,4 +34,7 @@ public class ProductoModel {
         return precio;
     }
 
+    public String toString() {
+        return this.nombreProducto;
+    }
 }

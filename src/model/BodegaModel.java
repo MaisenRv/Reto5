@@ -33,5 +33,8 @@ public class BodegaModel {
         return direccion;
     }
 
+    public String toString() {
+        return this.nombreBodega;
+    }
 
 }

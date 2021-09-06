@@ -7,23 +7,25 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-public class PanelResultados extends JPanel {
+public class PanelResultados extends JPanel{
 
-    private JTable      tblResultados;
+    private JTable tblResultados;
     private JScrollPane jspPane;
-    
-    public PanelResultados(){
+
+    public PanelResultados() {
         initComponents();
+        setBounds(650, 0, 650, 700);
     }
-    
-    private void initComponents(){
+
+    private void initComponents() {
         this.tblResultados = new JTable();
         this.tblResultados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
-        this.jspPane = new JScrollPane(this.tblResultados);
-        add(jspPane, BorderLayout.CENTER);
-    }
 
+        this.jspPane = new JScrollPane(this.tblResultados);
+        System.out.println(this.tblResultados.getSelectedRow());
+        add(jspPane, BorderLayout.CENTER);
+
+    }
 
     public JTable getTblResultados() {
         return tblResultados;
