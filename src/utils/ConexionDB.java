@@ -24,9 +24,7 @@ public class ConexionDB {
 
             conn = DriverManager.getConnection(url, usuario, contraseña);
 
-            if (conn != null) {
-                System.out.println("conectado");
-            }
+            //if (conn != null) {System.out.println("conectado");}
             
         } catch (Exception e) {
             e.getMessage();

@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Dimension;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
@@ -20,7 +19,6 @@ public class PanelResultados extends JPanel{
     private void initComponents() {
         this.tblResultados = new JTable();
         this.tblResultados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
         this.jspPane = new JScrollPane(this.tblResultados);
         System.out.println(this.tblResultados.getSelectedRow());
         add(jspPane, BorderLayout.CENTER);

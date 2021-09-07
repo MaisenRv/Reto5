@@ -42,7 +42,7 @@ public class BodegaDAO {
         BodegaModel bodega = null;
 
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
 
             String sql = "SELECT nombre,direccion FROM bodega WHERE idBodega = ?;";
             PreparedStatement statement =conn.prepareStatement(sql);
@@ -61,7 +61,7 @@ public class BodegaDAO {
 
     public void insertBodega(BodegaModel bodega) {
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
 
             String sql = "INSERT INTO bodega(nombre,direccion) VALUES (?,?);";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -81,7 +81,7 @@ public class BodegaDAO {
 
     public void updateBodega(BodegaModel bodega) {
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
 
             String sql = "UPDATE bodega SET nombre = ?, direccion = ? WHERE idBodega = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -100,7 +100,7 @@ public class BodegaDAO {
 
     public void deleteBodega(int id) {
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
             String sql = "DELETE FROM bodega WHERE idbodega = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);

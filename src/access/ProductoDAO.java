@@ -43,7 +43,7 @@ public class ProductoDAO {
         ProductoModel producto = null;
 
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
 
             String sql = "SELECT nombre,precio FROM producto WHERE idproducto = ? ;";
             PreparedStatement statement =conn.prepareStatement(sql);
@@ -62,7 +62,7 @@ public class ProductoDAO {
 
     public void insertProducto(ProductoModel producto) {
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
 
             String sql = "INSERT INTO producto(nombre,precio) VALUES (?,?);";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -82,7 +82,7 @@ public class ProductoDAO {
 
     public void updateProducto(ProductoModel producto) {
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
 
             String sql = "UPDATE producto SET nombre = ?, precio = ? WHERE idproducto = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class ProductoDAO {
 
     public void deleteProducto(int id) {
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
             String sql = "DELETE FROM producto WHERE idproducto = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);

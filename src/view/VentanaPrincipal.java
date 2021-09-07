@@ -19,12 +19,8 @@ public class VentanaPrincipal extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        PanelResultados panelResultados = new PanelResultados();
-        
-        PanelControles panelControles = new PanelControles(panelResultados);
-        add(panelControles);
-        
+        Paneles();
+
         setUndecorated(true);
         setSize(1300, 700);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -35,7 +31,9 @@ public class VentanaPrincipal extends JFrame {
         setVisible(true);
     }
 
-    public void PanelBotones() {
-
+    public void Paneles() {
+        PanelResultados panelResultados = new PanelResultados();
+        PanelControles panelControles = new PanelControles(panelResultados);
+        add(panelControles);
     }
 }

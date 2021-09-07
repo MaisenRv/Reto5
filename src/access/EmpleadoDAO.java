@@ -41,7 +41,7 @@ public class EmpleadoDAO {
         EmpleadoModel empleado = null;
 
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
 
             String sql = "SELECT idBodega,nombre,edad FROM empleado WHERE idempleado = ?;";
             PreparedStatement statement =conn.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class EmpleadoDAO {
 
     public void insertEmpleado(EmpleadoModel empleado) {
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
 
             String sql = "INSERT INTO empleado(idBodega,nombre,edad) VALUES (?,?,?);";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -81,7 +81,7 @@ public class EmpleadoDAO {
 
     public void updateEmpleado(EmpleadoModel empleado) {
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
 
             String sql = "UPDATE empleado SET idBodega = ?, nombre = ?, edad = ? WHERE idempleado = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -100,7 +100,7 @@ public class EmpleadoDAO {
 
     public void deleteEmpleado(int id) {
         try {
-            if (conn == null) ConexionDB.getConexion();
+            if (conn == null) conn = ConexionDB.getConexion();
             String sql = "DELETE FROM empleado WHERE idempleado = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);

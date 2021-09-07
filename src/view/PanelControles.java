@@ -4,14 +4,10 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
-
-
 import java.util.ArrayList;
-
 import controller.DatosIniciales;
 import controller.EventoClick;
 import controller.EventoMouse;
-
 import java.awt.Color;
 import java.awt.Font;
 
@@ -25,34 +21,42 @@ import model.ProductoModel;
 
 public class PanelControles extends JPanel{
 
-    private JTable tlbResultados;
+    
+    private static JTable tlbResultados;
     private JLabel titulo_lbl, insertar_lbl, nBodega_lbl, nProducto_lbl, cantidad_lbl, consultar_lbl, consultarBodega_lbl, consultarProducto_lbl;
     private JComboBox<BodegaModel> nBodega_box, buscarBodega_box; 
     private JComboBox<ProductoModel> nProducto_box, buscarProducto_box;
     private JTextField cantidad_txt;
     private JButton insertar_btn, eliminar_btn, consultar_btn, actualizar_btn;
 
+    //Eventos
     private EventoClick eventoClick = new EventoClick(this);
     private EventoMouse eventoMouse = new EventoMouse(this);
 
+    //Controladores
+    private DatosIniciales datosIniciales = new DatosIniciales();
+
     public PanelControles(PanelResultados panelResultados) {
-        this.tlbResultados = panelResultados.getTblResultados();
+        tlbResultados = panelResultados.getTblResultados();
         add(panelResultados);
-        this.tlbResultados.addMouseListener(eventoMouse);
+        tlbResultados.addMouseListener(eventoMouse);
         initComponents();
     }
 
     private void initComponents() {
         setLayout(null);
         setSize(650, 700);
-        DatosIniciales datosIniciales = new DatosIniciales();
-        this.setTablaResultados(datosIniciales.getAlmacena());
+
+        //Estableciendo los datos de la tabla
+        setTablaResultados(datosIniciales.getAlmacena());
+
+        //creando todos los elementos
         crearEtiquetas();
         crearComoBoxes(datosIniciales);
         crearCajasTexto();
         crearBotones();
     }
-
+    
     public void crearEtiquetas() {
         this.titulo_lbl = new JLabel("Te reto a programarlo S.A.S");
         this.titulo_lbl.setForeground(Color.BLACK);
@@ -102,7 +106,6 @@ public class PanelControles extends JPanel{
         this.consultarProducto_lbl.setBounds(25, 240, 300, 20);
         add(this.consultarProducto_lbl).setVisible(true);
     }
-
     public void crearComoBoxes(DatosIniciales datosIniciales) {
         this.nBodega_box = new JComboBox<BodegaModel>();
         this.nBodega_box.setModel(new DefaultComboBoxModel<>(datosIniciales.getBodegas().toArray(new  BodegaModel[datosIniciales.getBodegas().size()])));
@@ -124,50 +127,43 @@ public class PanelControles extends JPanel{
         this.buscarProducto_box.setBounds(330, 240, 150, 20);
         add(this.buscarProducto_box).setVisible(true);
     }
-
     public void crearCajasTexto() {
         this.cantidad_txt = new JTextField();
         this.cantidad_txt.setBounds(330, 125, 80, 20);
         add(this.cantidad_txt).setVisible(true);
     }
-
     public void crearBotones() {
         this.insertar_btn = new JButton("INSERTAR");
         this.insertar_btn.setFont(new Font("Courier new", Font.BOLD, 14));
-        this.insertar_btn.setBounds(420, 125, 100, 20);
+        this.insertar_btn.setBounds(420, 125, 120, 20);
         add(this.insertar_btn).setVisible(true);
         this.insertar_btn.addActionListener(eventoClick);
 
-
         this.eliminar_btn = new JButton("ELIMINAR");
         this.eliminar_btn.setFont(new Font("Courier new", Font.BOLD, 14));
-        this.eliminar_btn.setBounds(420, 150, 100, 20);
+        this.eliminar_btn.setBounds(420, 150, 120, 20);
         add(this.eliminar_btn).setVisible(true);
         this.eliminar_btn.setEnabled(false);
-        this.eliminar_btn.addActionListener(eventoClick);
+        this.eliminar_btn.addMouseListener(eventoMouse);
 
         this.consultar_btn = new JButton("BUSCAR");
         this.consultar_btn.setFont(new Font("Courier new", Font.BOLD, 14));
-        this.consultar_btn.setBounds(420, 265, 100, 20);
+        this.consultar_btn.setBounds(420, 265, 120, 20);
         add(this.consultar_btn).setVisible(true);
         this.consultar_btn.addActionListener(eventoClick);
         
         this.actualizar_btn = new JButton("ACTUALIZAR");
         this.actualizar_btn.setFont(new Font("Courier new", Font.BOLD, 14));
-        this.actualizar_btn.setBounds(420, 290, 100, 20);
+        this.actualizar_btn.setBounds(420, 290, 120, 20);
         add(this.actualizar_btn).setVisible(true);
         this.actualizar_btn.addActionListener(eventoClick);
     }
-
-    public void setTablaResultados(ArrayList<AlmacenaModel> almacena){
+    public static void setTablaResultados(ArrayList<AlmacenaModel> almacena){
+        tlbResultados.removeAll();
         String [] cabeseras = {"Bodega","Direccion","Producto","Precio unitario","Cantidad"};
-        this.tlbResultados.removeAll();
-
         DefaultTableModel tableModel = new DefaultTableModel();
-
         tableModel.setColumnIdentifiers(cabeseras);
-        this.tlbResultados.setModel(tableModel);
-
+        tlbResultados.setModel(tableModel);
         for(int i=0; i < almacena.size(); i++){
             tableModel.addRow(almacena.get(i).toArray());
         }
@@ -194,6 +190,6 @@ public class PanelControles extends JPanel{
         return actualizar_btn;
     }
 
-
+    
     
 }
