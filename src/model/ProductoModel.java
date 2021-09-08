@@ -11,7 +11,7 @@ public class ProductoModel {
         this.precio = precio;
     }
 
-    
+     //---------------------getters y setters ---------------------//
 
     /**
      * @return int return the idProducto

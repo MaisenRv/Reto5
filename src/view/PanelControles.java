@@ -169,6 +169,7 @@ public class PanelControles extends JPanel{
         }
     }
 
+     //---------------------getters y setters ---------------------//
     public JTable getTlbResultados() {
         return tlbResultados;
     }
@@ -190,6 +191,15 @@ public class PanelControles extends JPanel{
         return actualizar_btn;
     }
 
-    
+    public JComboBox<BodegaModel> getNBodegaBox() {
+        return this.nBodega_box;
+    }
+
+    public JComboBox<ProductoModel> getNProductoBox() {
+        return this.nProducto_box;
+    }
+    public JTextField getCantidadTxt() {
+        return this.cantidad_txt;
+    }
     
 }

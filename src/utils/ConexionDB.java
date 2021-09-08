@@ -32,6 +32,7 @@ public class ConexionDB {
 
         return conn;
     } 
+
     public static void main(String[] args) {
         getConexion();
     }

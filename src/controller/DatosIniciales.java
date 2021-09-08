@@ -4,12 +4,13 @@ import access.*;
 import model.*;
 
 public class DatosIniciales {
+    // creando variables para los modelos
     private ArrayList<AlmacenaModel> almacena= null;
     private ArrayList<AlmacenaModel> almacena_eliminar= null;
     private ArrayList<BodegaModel> bodegas= null;
-    //private ArrayList<EmpleadoModel> empleados= null;
     private ArrayList<ProductoModel> productos= null;
 
+    //Construstores
     public DatosIniciales() {
         BodegaDAO bodegaDAO = new BodegaDAO();
         this.bodegas = bodegaDAO.getAllBodegas();
@@ -28,7 +29,7 @@ public class DatosIniciales {
         this.almacena_eliminar =  almacenaDAO.getAlmacenaIds(bodega, producto);
     }
 
-    //---------------------getters---------------------//
+    //---------------------getters y setters ---------------------//
     public ArrayList<BodegaModel> getBodegas() {
         return bodegas;
     }

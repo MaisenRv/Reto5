@@ -39,7 +39,7 @@ public class AlmacenaModel {
         this.precio = precio;
         this.cantidad = cantidad;
     }
-
+    //---------------------getters y setters ---------------------//
     public String getNombreProducto() {
         return this.nombreProducto;
     }

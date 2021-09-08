@@ -25,6 +25,7 @@ public class PanelResultados extends JPanel{
 
     }
 
+     //---------------------getters y setters ---------------------//
     public JTable getTblResultados() {
         return tblResultados;
     }

@@ -11,7 +11,7 @@ public class BodegaModel {
         this.direccion = direccion;
     }
     
-
+    //---------------------getters y setters ---------------------//
     /**
      * @return int return the idBodega
      */

@@ -13,7 +13,7 @@ public class EmpleadoModel {
         this.edad = edad;
     }
 
-    
+     //---------------------getters y setters ---------------------//
 
     /**
      * @return int return the idEmpleado
