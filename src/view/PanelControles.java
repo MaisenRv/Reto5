@@ -21,13 +21,13 @@ import model.ProductoModel;
 
 public class PanelControles extends JPanel{
 
-    
+    JPanel titulo_panel;
     private static JTable tlbResultados;
     private JLabel titulo_lbl, insertar_lbl, nBodega_lbl, nProducto_lbl, cantidad_lbl, consultar_lbl, consultarBodega_lbl, consultarProducto_lbl;
     private JComboBox<BodegaModel> nBodega_box, buscarBodega_box; 
     private JComboBox<ProductoModel> nProducto_box, buscarProducto_box;
     private JTextField cantidad_txt;
-    private JButton insertar_btn, eliminar_btn, consultar_btn, actualizar_btn;
+    private JButton insertar_btn, eliminar_btn, consultar_btn, actualizar_btn, cerrar_btn;
 
     //Eventos
     private EventoClick eventoClick = new EventoClick(this);
@@ -46,6 +46,7 @@ public class PanelControles extends JPanel{
     private void initComponents() {
         setLayout(null);
         setSize(650, 700);
+        setBackground(Color.gray);
 
         //Estableciendo los datos de la tabla
         setTablaResultados(datosIniciales.getAlmacena());
@@ -150,13 +151,19 @@ public class PanelControles extends JPanel{
         this.consultar_btn.setFont(new Font("Courier new", Font.BOLD, 14));
         this.consultar_btn.setBounds(420, 265, 120, 20);
         add(this.consultar_btn).setVisible(true);
-        this.consultar_btn.addActionListener(eventoClick);
+        this.consultar_btn.addMouseListener(eventoMouse);
         
         this.actualizar_btn = new JButton("ACTUALIZAR");
         this.actualizar_btn.setFont(new Font("Courier new", Font.BOLD, 14));
         this.actualizar_btn.setBounds(420, 290, 120, 20);
         add(this.actualizar_btn).setVisible(true);
         this.actualizar_btn.addActionListener(eventoClick);
+
+        this.cerrar_btn = new JButton("<html><center>X<html>");
+        this.cerrar_btn.setFont(new Font("Consolas", Font.BOLD, 30));
+        this.cerrar_btn.setBounds(1230, 10, 40, 30);
+        add(this.cerrar_btn).setVisible(true);
+        this.cerrar_btn.addActionListener(eventoClick);
     }
     public static void setTablaResultados(ArrayList<AlmacenaModel> almacena){
         tlbResultados.removeAll();
@@ -201,5 +208,27 @@ public class PanelControles extends JPanel{
     public JTextField getCantidadTxt() {
         return this.cantidad_txt;
     }
-    
+
+      /**
+     * @return the buscarBodega_box
+     */
+    public JComboBox<BodegaModel> getBuscarBodega_box() {
+        return buscarBodega_box;
+    }
+
+    /**
+     * @return the buscarProducto_box
+     */
+    public JComboBox<ProductoModel> getBuscarProducto_box() {
+        return buscarProducto_box;
+    }
+
+    /**
+     * @return the cerrar_btn
+     */
+    public JButton getCerrar_btn() {
+        return cerrar_btn;
+    }
+
+
 }

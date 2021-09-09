@@ -62,6 +62,12 @@ public class EventoClick implements ActionListener {
             }
             panelControles.getCantidadTxt().setText("");
         }
+
+          //BOTON CERRAR
+          if (e.getSource() == this.panelControles.getCerrar_btn()) {
+            System.exit(0);
+        }
+
     }
 
 }

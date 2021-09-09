@@ -13,7 +13,7 @@ public class PanelResultados extends JPanel{
 
     public PanelResultados() {
         initComponents();
-        setBounds(650, 0, 650, 700);
+        setBounds(650, 50, 650, 700);
     }
 
     private void initComponents() {

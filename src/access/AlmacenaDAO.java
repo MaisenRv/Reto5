@@ -68,6 +68,52 @@ public class AlmacenaDAO {
         return almacenas;
     }
 
+    public ArrayList<AlmacenaModel> getAlmacenaSearch(int idBodega, int idProducto) {
+        ArrayList<AlmacenaModel> almacenas = new ArrayList<AlmacenaModel>();
+        try {
+            if (conn == null) {
+                conn = ConexionDB.getConexion();
+            }
+
+            String sql;
+            PreparedStatement statement;
+            if (idBodega == -1) {
+                sql = "SELECT bodega.nombre, direccion, producto.nombre,precio,cantidad"
+                        + " FROM bodega JOIN producto JOIN almacena"
+                        + " ON (bodega.idBodega = almacena.idBodega AND producto.idproducto = almacena.idproducto)"
+                        + " WHERE producto.idproducto = ?";
+                statement = conn.prepareStatement(sql);
+                statement.setInt(1, idProducto);
+            } else if (idProducto == -1) {
+                sql = "SELECT bodega.nombre, direccion, producto.nombre,precio,cantidad"
+                        + " FROM bodega JOIN producto JOIN almacena"
+                        + " ON (bodega.idBodega = almacena.idBodega AND producto.idproducto = almacena.idproducto)"
+                        + " WHERE bodega.idBodega=?";
+                statement = conn.prepareStatement(sql);
+                statement.setInt(1, idBodega);
+            } else {
+                sql = "SELECT bodega.nombre, direccion, producto.nombre,precio,almacena.cantidad"
+                        + " FROM bodega JOIN producto JOIN almacena"
+                        + " WHERE bodega.idBodega = ? AND producto.idproducto = ?"
+                        + " AND almacena.idBodega = ? and almacena.idproducto = ?";
+                statement = conn.prepareStatement(sql);
+                statement.setInt(1, idBodega);
+                statement.setInt(2, idProducto);
+                statement.setInt(3, idBodega);
+                statement.setInt(4, idProducto);
+            }
+
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                AlmacenaModel almacena = new AlmacenaModel(result.getString(1), result.getString(2), result.getString(3), result.getDouble(4), result.getInt(5));
+                almacenas.add(almacena);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Código : " + e.getErrorCode() + "\nError :" + e.getMessage());
+        }
+        return almacenas;
+    }
+
     public AlmacenaModel getAlmacena(int idBodega, int idProducto) {
         AlmacenaModel almacena = null;
 

@@ -8,8 +8,9 @@ import javax.swing.JTable;
 import javax.swing.event.MouseInputListener;
 
 import access.AlmacenaDAO;
+import model.BodegaModel;
+import model.ProductoModel;
 import view.PanelControles;
-
 
 public class EventoMouse implements MouseInputListener {
 
@@ -42,11 +43,17 @@ public class EventoMouse implements MouseInputListener {
         if (e.getSource() == this.panelControles.getEliminar_btn()) {
             this.panelControles.getEliminar_btn().setEnabled(false);
             int decision = JOptionPane.showConfirmDialog(this.panelControles.getEliminar_btn(), "Esta seguro que quiere eliminar el registro seleccionado",
-                    "¿Quiere borrar el registro?", JOptionPane.YES_NO_OPTION);
+                            "¿Quiere borrar el registro?", JOptionPane.YES_NO_OPTION);
             if (decision == 0) {
                 eliminarDatos(this.bodega,this.producto);
             }
             
+        }
+        //BOTON BUSCAR
+        if (e.getSource() == this.panelControles.getConsultar_btn()) {
+            int idBodega = ((BodegaModel) panelControles.getBuscarBodega_box().getSelectedItem()).getIdBodega();
+            int idProducto = ((ProductoModel) panelControles.getBuscarProducto_box().getSelectedItem()).getIdProducto();
+            BuscarDatos(idBodega, idProducto);
         }
     }
 
@@ -87,6 +94,16 @@ public class EventoMouse implements MouseInputListener {
         ids.add(datosIniciales.getAlmacenaEliminar().get(0).getIdProductoFK());
         AlmacenaDAO almacenaDAO = new AlmacenaDAO();
         almacenaDAO.deleteAlmacena(ids.get(0), ids.get(1));
+    }
+    public void BuscarDatos(int idBodega, int idProducto) {
+        idBodega = ((BodegaModel) panelControles.getBuscarBodega_box().getSelectedItem()).getIdBodega();
+        idProducto = ((ProductoModel) panelControles.getBuscarProducto_box().getSelectedItem()).getIdProducto();
+        AlmacenaDAO almacenaDAO = new AlmacenaDAO();
+        if (idBodega == -1 && idProducto == -1) {
+            PanelControles.setTablaResultados(almacenaDAO.getAllAlmacena());
+        } else {
+            PanelControles.setTablaResultados(almacenaDAO.getAlmacenaSearch(idBodega, idProducto));
+        }
     }
 
 }
